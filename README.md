@@ -7,3 +7,4 @@ Template JavaScript Development Environment
 - Add express server and basic web page
 - Wrote npm scripts for common dev tasks
 - Configure Babel and update build scripts to use ES6
+- Add Webpack config and bundling
