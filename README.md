@@ -8,3 +8,4 @@ Template JavaScript Development Environment
 - Wrote npm scripts for common dev tasks
 - Configure Babel and update build scripts to use ES6
 - Add Webpack config and bundling
+- Add ESLint config and npm scripts
