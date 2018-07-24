@@ -9,3 +9,4 @@ Template JavaScript Development Environment
 - Configure Babel and update build scripts to use ES6
 - Add Webpack config and bundling
 - Add ESLint config and npm scripts
+- Add Mocha test with JSDOM example
