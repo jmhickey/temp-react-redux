@@ -10,3 +10,4 @@ Template JavaScript Development Environment
 - Add Webpack config and bundling
 - Add ESLint config and npm scripts
 - Add Mocha test with JSDOM example
+- Add HTTP examples and test JSON server
