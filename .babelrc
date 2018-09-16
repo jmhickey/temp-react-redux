@@ -1,5 +1,11 @@
 {
   "presets": [
-    "latest"
-  ]
+    "latest",
+    "react"
+  ],
+  "env": {
+    "development": {
+      "presets": ["react-hmre"]
+    }
+  }
 }
