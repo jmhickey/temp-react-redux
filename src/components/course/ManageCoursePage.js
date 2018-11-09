@@ -1,4 +1,5 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as courseActions from '../../actions/courseActions';
@@ -67,7 +68,7 @@ export class ManageCoursePage extends React.Component {
   redirect() {
     this.setState({saving: false});
     toastr.success('Course saved');
-    this.context.router.push('/courses');
+    this.context.router.history.push('/courses');
   }
 
   render() {
@@ -102,7 +103,7 @@ function getCourseById(courses, id) {
 }
 
 function mapStateToProps(state, ownProps) {
-  const courseId = ownProps.params.id; // from the path `/course/:id`
+  const courseId = ownProps.match.params.id; // from the path `/course/:id`
   let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
 
   if (courseId && state.courses.length > 0) {

@@ -2,9 +2,11 @@
 // This file does the following:
 // 1. Sets Node environment variable
 // 2. Registers babel for transpiling our code for testing
-// 3. Disables Webpack-specific features that Mocha doesn't understand.
-// 4. Requires jsdom so we can test via an in-memory DOM in Node
-// 5. Sets up global vars that mimic a browser.
+// 3. Add Polyfill needed for requestAnimationFrame relied on by React 16
+// 4. Disables Webpack-specific features that Mocha doesn't understand
+// 5. Requires jsdom so we can test via an in-memory DOM in Node
+// 6. Sets up global vars that mimic a browser
+// 7. Configures enzyme for testing React 16
 
 /* eslint-disable no-var*/
 
@@ -22,6 +24,9 @@ process.env.NODE_ENV = 'test';
 // Register babel so that it will transpile ES6 to ES5
 // before our tests run.
 require('babel-register')();
+
+// Add polyfill for requestAnimationFrame expected by React 16
+require('raf/polyfill');
 
 // Disable webpack-specific features for tests since
 // Mocha doesn't know what to do with them.
@@ -47,5 +52,10 @@ Object.keys(document.defaultView).forEach((property) => {
 global.navigator = {
   userAgent: 'node.js'
 };
+
+//Configure enzyme
+var configure = require('enzyme').configure;
+var Adapter = require('enzyme-adapter-react-16');
+configure({ adapter: new Adapter() });
 
 documentRef = document;  //eslint-disable-line no-undef

@@ -1,10 +1,7 @@
 import expect from 'expect';
 import React from 'react';
-import {configure, mount, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15.4';
+import {shallow} from 'enzyme';
 import CourseForm from './CourseForm';
-
-configure({  adapter: new Adapter() });
 
 function setup(saving) {
   const props = {

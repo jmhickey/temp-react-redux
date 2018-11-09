@@ -1,7 +1,13 @@
 // This component handles the App template used on every page.
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 import Header from './common/Header';
+import HomePage from './home/HomePage';
+import AboutPage from './about/AboutPage';
+import CoursesPage from './course/CoursesPage';
+import ManageCoursePage from './course/ManageCoursePage';
 
 class App extends React.Component {
   render() {
@@ -10,14 +16,19 @@ class App extends React.Component {
         <Header
           loading={this.props.loading}
         />
-        {this.props.children}
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/courses" component={CoursesPage} />
+          <Route path="/course/:id" component={ManageCoursePage} />
+          <Route path="/course" component={ManageCoursePage} />
+          <Route path="/about" component={AboutPage} />
+        </Switch>
       </div>
     );
   }
 }
 
 App.propTypes = {
-  children: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired
 };
 
@@ -27,4 +38,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));
