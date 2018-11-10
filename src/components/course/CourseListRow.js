@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-const CourseListRow = ({course}) => {
+const CourseListRow = ({course, onDelete}) => {
+  let handleDelete = () => {
+    onDelete(course.id);
+  };
+
   return (
     <tr>
       <td><a href={course.watchHref} target="_blank">Watch</a></td>
@@ -10,12 +14,14 @@ const CourseListRow = ({course}) => {
       <td>{course.authorId}</td>
       <td>{course.category}</td>
       <td>{course.length}</td>
+      <td><span className="remove-x" onClick={handleDelete}>X</span></td>
     </tr>
   );
 };
 
 CourseListRow.propTypes = {
-  course: PropTypes.object.isRequired
+  course: PropTypes.object.isRequired,
+  onDelete: PropTypes.func.isRequired
 };
 
 export default CourseListRow;
