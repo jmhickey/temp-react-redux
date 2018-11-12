@@ -6,8 +6,8 @@ import {connect} from 'react-redux';
 import Header from './common/Header';
 import HomePage from './home/HomePage';
 import AboutPage from './about/AboutPage';
-import CoursesPage from './course/CoursesPage';
-import ManageCoursePage from './course/ManageCoursePage';
+import MembersPage from './member/MembersPage';
+import ManageMemberPage from './member/ManageMemberPage';
 
 class App extends React.Component {
   render() {
@@ -18,9 +18,9 @@ class App extends React.Component {
         />
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route path="/courses" component={CoursesPage} />
-          <Route path="/course/:id" component={ManageCoursePage} />
-          <Route path="/course" component={ManageCoursePage} />
+          <Route path="/members" component={MembersPage} />
+          <Route path="/member/:id" component={ManageMemberPage} />
+          <Route path="/member" component={ManageMemberPage} />
           <Route path="/about" component={AboutPage} />
         </Switch>
       </div>

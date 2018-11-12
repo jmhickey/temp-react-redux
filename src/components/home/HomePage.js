@@ -1,16 +1,22 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class HomePage extends React.Component {
   render() {
     return (
       <div className="jumbotron">
-        <h1>Pluralsight Administration</h1>
-        <p>React, Redux and React Router in ES6 for ultra-responsive web apps.</p>
-        <Link to="/about" className="btn btn-primary btn-lg">Learn more</Link>
+        <h1>Member Admin</h1>
+        <p>Demo app with React, Redux and React Router.</p>
+        <Link to={{ pathname: "/about", search: location.search }} className="btn btn-primary btn-lg">Learn more</Link>
       </div>
     );
   }
 }
 
-export default HomePage;
+HomePage.propTypes = {
+  location: PropTypes.object.isRequired
+};
+
+export default withRouter(HomePage);

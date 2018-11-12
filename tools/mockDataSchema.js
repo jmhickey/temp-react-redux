@@ -1,10 +1,10 @@
 export const schema = {
   "type": "object",
   "properties": {
-    "authors": {
+    "members": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 5,
+      "minItems": 4,
+      "maxItems": 8,
       "items": {
         "type": "object",
         "properties": {
@@ -21,60 +21,36 @@ export const schema = {
             "type": "string",
             "faker": "name.lastName"
           },
-          "birthdate": {
+          "genderId": {
             "type": "string",
-            "chance": {
-              "birthday": {
-                "string": true
-              }
-            }
+            "pattern": "M|F"
+          },
+          "birthDate": {
+            "type": "string",
+            "pattern": "^(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/19[3-9]\\d$"
           }
         },
-        required: ['id', 'firstName', 'lastName', 'birthdate']
+        required: ['id', 'firstName', 'lastName', 'genderId', 'birthDate']
       }
     },
-    "courses": {
+    "genders": {
       "type": "array",
-      "minItems": 4,
-      "maxItems": 8,
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
       "items": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "unique": true,
-            "minimum": 1
+        "enum": [
+          {
+            "id": "F",
+            "gender": "Female"
           },
-          "title": {
-            "type": "string",
-            "minLength": 5,
-            "maxLength:": 30,
-            "faker": "commerce.productName"
-          },
-          "watchHref": {
-            "type": "string",
-            "chance": {
-              "url": {
-                "domain": "pluralsight.com"
-              }
-            }
-          },
-          "authorId": {
-            "type": "string",
-            "pattern": "^[a-zA-Z]{5,10}$"
-          },
-          "length": {
-            "type": "string",
-            "pattern": "\\d\\d:\\d\\d"
-          },
-          "category": {
-            "type": "string",
-            "faker": "commerce.department"
+          {
+            "id": "M",
+            "gender": "Male"
           }
-        },
-        required: ['id', 'title', 'watchHref', 'authorId', 'length', 'category']
+        ]
       }
     }
   },
-  required: ['courses']
+  required: ['members','genders']
 };

@@ -1,8 +1,12 @@
-export function authorsFormattedForDropdown(authors) {
-  return authors.map(author => {
+export function gendersFormattedForDropdown(genders) {
+  return genders.map(g => {
     return {
-      value: author.id,
-      text: `${author.firstName} ${author.lastName}`
+      value: g.id,
+      text: g.gender
     };
   });
+}
+
+export function genderForDisplay(genders, genderId) {
+  return genders.find(gender => gender.id == genderId).gender;
 }
