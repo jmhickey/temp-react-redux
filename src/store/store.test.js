@@ -2,24 +2,24 @@ import expect from 'expect';
 import { createStore } from 'redux';
 import rootReducer from '../reducers';
 import initialState from '../reducers/initialState';
-import * as courseActions from '../actions/courseActions';
+import * as memberActions from '../actions/memberActions';
 
 describe('Store', () => {
-  it('should handle creating courses', () => {
+  it('should handle creating members', () => {
     // arrange
     const store = createStore(rootReducer, initialState);
-    const course = {
-      title: "Clean Code"
+    const member = {
+      lastName: "Smith"
     };
 
     // act
-    const action = courseActions.createCourseSuccess(course);
+    const action = memberActions.createMemberSuccess(member);
     store.dispatch(action);
 
     // assert
-    const actual = store.getState().courses[0];
+    const actual = store.getState().members[0];
     const expected = {
-      title: "Clean Code"
+      lastName: "Smith"
     };
 
     expect(actual).toEqual(expected);

@@ -1,21 +1,21 @@
 import * as types from './actionTypes';
 import memberApi from '../api/memberApi';
-import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
+import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
 export function loadMembersSuccess(members) {
   return { type: types.LOAD_MEMBERS_SUCCESS, members };
 }
 
 export function createMemberSuccess(member) {
-  return {type: types.CREATE_MEMBER_SUCCESS, member};
+  return { type: types.CREATE_MEMBER_SUCCESS, member };
 }
 
 export function updateMemberSuccess(member) {
-  return {type: types.UPDATE_MEMBER_SUCCESS, member};
+  return { type: types.UPDATE_MEMBER_SUCCESS, member };
 }
 
 export function deleteMemberSuccess(memberId) {
-  return {type: types.DELETE_MEMBER_SUCCESS, memberId};
+  return { type: types.DELETE_MEMBER_SUCCESS, memberId };
 }
 
 export function loadMembers() {

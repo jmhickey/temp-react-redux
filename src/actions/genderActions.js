@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import genderApi from '../api/genderApi';
-import {beginAjaxCall} from './ajaxStatusActions';
+import { beginAjaxCall } from './ajaxStatusActions';
 
 export function loadGendersSuccess(genders) {
   return { type: types.LOAD_GENDERS_SUCCESS, genders };

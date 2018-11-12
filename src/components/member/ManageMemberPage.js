@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as memberActions from '../../actions/memberActions';
 import MemberForm from './MemberForm';
-import {gendersFormattedForDropdown} from '../../selectors/selectors';
+import { gendersFormattedForDropdown } from '../../selectors/selectors';
 import toastr from 'toastr';
 
 export class ManageMemberPage extends React.Component {
@@ -36,7 +36,6 @@ export class ManageMemberPage extends React.Component {
   }
 
   memberFormIsValid() {
-    console.log("Member is: ", this.state.member);
     let formIsValid = true;
     let errors = {};
 

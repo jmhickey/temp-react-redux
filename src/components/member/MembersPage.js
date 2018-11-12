@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 import * as memberActions from '../../actions/memberActions';
 import MemberList from './MemberList';
-import {withRouter} from 'react-router-dom';
 import toastr from 'toastr';
 
 class MembersPage extends React.Component {

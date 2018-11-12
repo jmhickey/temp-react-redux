@@ -18,8 +18,8 @@ memberRouter.post('/', (req, res) => {
 });
 
 memberRouter.put('/:memberId', (req, res) => {
-  memberServer.saveMember(req.body).then(course => {
-    res.json(course);
+  memberServer.saveMember(req.body).then(member => {
+    res.json(member);
   }).catch(err => {
     res.status(500).send({error: err});
   });
