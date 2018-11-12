@@ -4,8 +4,8 @@ import path from 'path';
 import opn from 'opn';
 import webpack from 'webpack';
 import config from '../webpack.config.dev';
-import authorServer from './rest/inMemoryAuthorServer';
-import courseServer from './rest/inMemoryCourseServer';
+import genderServer from './rest/inMemoryGenderServer';
+import memberServer from './rest/inMemoryMemberServer';
 
 /* eslint-disable no-console */
 
@@ -21,32 +21,36 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler));
 app.use(bodyParser.json());
 
-app.get('/rest/authors', (req, res) => {
-  authorServer.getAllAuthors().then(authors => {
-    res.json(authors);
+app.get('/rest/genders', (req, res) => {
+  genderServer.getAllGenders().then(genders => {
+    res.json(genders);
   });
 });
 
-app.get('/rest/courses', (req, res) => {
-  courseServer.getAllCourses().then(courses => {
-    res.json(courses);
+app.get('/rest/members', (req, res) => {
+  memberServer.getAllMembers().then(members => {
+    res.json(members);
   });
 });
 
-app.post('/rest/courses', (req, res) => {
-  courseServer.saveCourse(req.body).then(course => {
+app.post('/rest/members', (req, res) => {
+  memberServer.saveMember(req.body).then(member => {
+    res.json(member);
+  }).catch(err => {
+    res.status(500).send({error: err});
+  });
+});
+
+app.put('/rest/members/:memberId', (req, res) => {
+  memberServer.saveMember(req.body).then(course => {
     res.json(course);
+  }).catch(err => {
+    res.status(500).send({error: err});
   });
 });
 
-app.put('/rest/courses/:courseId', (req, res) => {
-  courseServer.saveCourse(req.body).then(course => {
-    res.json(course);
-  });
-});
-
-app.delete('/rest/courses/:courseId', (req, res) => {
-  courseServer.deleteCourse(req.param("courseId")).then(() => {
+app.delete('/rest/members/:memberId', (req, res) => {
+  memberServer.deleteMember(req.params.memberId).then(() => {
     res.json({});
   });
 });
