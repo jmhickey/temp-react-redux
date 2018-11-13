@@ -43,8 +43,9 @@ export class ManageMemberPage extends React.Component {
     // Not 100% correct -- would be replaced with more sophisticated validation in real app.
     let birthDateRe = /^(0[1-9]|1[012])\/(0[1-9]|[12][0-9]|3[01])\/(19|20)\d\d$/;
 
-    if (this.state.member.lastName.length < 2) {
-      errors.lastName = 'Last Name must be at least 2 characters.';
+    // Perform required check here, and server checks to ensure at least 2 characters.
+    if (!this.state.member.lastName.length) {
+      errors.lastName = 'Last Name is required';
       formIsValid = false;
     }
 

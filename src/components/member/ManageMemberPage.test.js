@@ -18,6 +18,6 @@ describe('Manage Member Page', () => {
     const saveButton = wrapper.find('input').last();
     expect(saveButton.prop('type')).toBe('submit');
     saveButton.simulate('click');
-    expect(wrapper.state().errors.lastName).toBe('Last Name must be at least 2 characters.');
+    expect(wrapper.state().errors.lastName).toBe('Last Name is required');
   });
 });
