@@ -27,7 +27,7 @@ const members = [
   }
 ];
 
-const generateId = (member) => {
+const generateId = () => {
   return Math.max(...members.map(m => m.id))+1;
 };
 
@@ -56,7 +56,7 @@ class InMemoryMemberServer {
           members.splice(existingMemberIndex, 1, member);
         } else {
           //Create member
-          member.id = generateId(member);
+          member.id = generateId();
           members.push(member);
         }
 
@@ -68,10 +68,10 @@ class InMemoryMemberServer {
   static deleteMember(memberId) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const indexOfMemberToDelete = members.findIndex(member => {
-          member.id == memberId;
-        });
-        members.splice(indexOfMemberToDelete, 1);
+        const indexOfMemberToDelete = members.findIndex(member => member.id == memberId);
+        if (indexOfMemberToDelete > -1) {
+          let q = members.splice(indexOfMemberToDelete, 1);
+        }
         resolve();
       }, delay);
     });

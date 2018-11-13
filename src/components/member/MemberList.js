@@ -15,7 +15,7 @@ const MemberList = ({members, allGenders, onDelete}) => {
         </tr>
       </thead>
       <tbody>
-        {[].concat(members).sort((a,b) => a.id - b.id).map(member =>
+        {members.map(member =>
           <MemberListRow key={member.id} member={member} allGenders={allGenders} onDelete={onDelete}/>
         )}
       </tbody>

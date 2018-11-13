@@ -53,7 +53,7 @@ MembersPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    members: state.members,
+    members: [...(state.members)].sort((a,b) => a.id - b.id),
     genders: state.genders
   };
 }
