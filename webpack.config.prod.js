@@ -1,17 +1,11 @@
 import path from 'path';
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import WebpackMd5Hash from 'webpack-md5-hash';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-
-const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('production')
-};
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 export default {
-  debug: true,
+  mode: 'production',
   devtool: 'source-map',
-  noInfo: false,
   entry: {
     vendor: path.resolve(__dirname, 'src/vendor'),
     main: path.resolve(__dirname, 'src/index')
@@ -24,15 +18,8 @@ export default {
   },
   plugins: [
     // Generate an external css file with a hash in the filename
-    new ExtractTextPlugin('[name].[contenthash].css'),
-
-    // Hash the files using MD5 so that their names change when the content changes.
-    new WebpackMd5Hash(),
-
-    // Use CommonsChunkPlugin to create a separate bundle
-    // of vendor libraries so that they're cached separately.
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor'
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
     }),
 
     // Create HTML file that includes reference to bundled JS.
@@ -53,23 +40,24 @@ export default {
       inject: true
     }),
 
-    // Trigger production-specific changes for React
-    new webpack.DefinePlugin(GLOBALS),
-
-    // Eliminate duplicate packages when generating bundle
-    new webpack.optimize.DedupePlugin(),
-
-    // Minify JS
-    new webpack.optimize.UglifyJsPlugin()
+    // Enable debugging on all loaders
+    new webpack.LoaderOptionsPlugin({
+      debug: true
+    })
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    }
+  },
   module: {
-    loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
-      {test: /\.css$/, loader: ExtractTextPlugin.extract("css?sourceMap")},
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"},
-      {test: /\.(woff|woff2|ttf)$/, loader: "url?prefix=font/&limit=5000"},
-      {test: /\.tff(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=application/octet-stream"},
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&mimetype=image/svg+xml"}
+    rules: [
+      {test: /\.js$/, exclude: /node_modules/, use: 'babel-loader'},
+      {test: /\.css$/, use: [{loader: MiniCssExtractPlugin.loader}, 'css-loader']},
+      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, use: "file-loader"},
+      {test: /\.(woff|woff2|ttf)$/, use: "url-loader?prefix=font/&limit=5000"},
+      {test: /\.tff(\?v=\d+\.\d+\.\d+)?$/, use: "url-loader?limit=10000&mimetype=application/octet-stream"},
+      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, use: "url-loader?limit=10000&mimetype=image/svg+xml"}
     ]
   }
 };
