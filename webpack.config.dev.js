@@ -1,5 +1,6 @@
-import webpack from 'webpack';
 import path from 'path';
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
   debug: true,
@@ -7,18 +8,20 @@ export default {
   noInfo: false,
   entry: [
     'webpack-hot-middleware/client?reload=true', //note that it reloads the page if hot module reloading fails.
-    path.resolve(__dirname, 'src/index')
+    path.resolve(__dirname, 'src')
   ],
   target: 'web',
   output: {
-    path: path.resolve(__dirname, '/dist'), // Note: Physical files are only output by the production build task `npm run build`
+    path: path.resolve(__dirname, 'src'),
     publicPath: '/',
     filename: 'bundle.js'
   },
-  devServer: {
-    contentBase: './src'
-  },
   plugins: [
+    // Create HTML file that includes reference to bundled JS.
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      inject: true
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ],

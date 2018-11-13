@@ -24,8 +24,17 @@ app.use(bodyParser.json());
 app.use('/rest/genders', genderRouter);
 app.use('/rest/members', memberRouter);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../src/index.html'));
+app.get('*', (req, res, next) => {
+  // res.sendFile(path.join(__dirname, '../src/index.html'));
+  const filename = path.join(compiler.outputPath,'index.html');
+  compiler.outputFileSystem.readFile(filename, function(err, result){
+    if (err) {
+      return next(err);
+    }
+    res.set('content-type','text/html');
+    res.send(result);
+    res.end();
+  });
 });
 
 app.listen(port, (err) => {

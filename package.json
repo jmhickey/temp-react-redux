@@ -15,8 +15,7 @@
     "test:watch": "npm run test -- --watch",
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "node_modules/.bin/rimraf ./dist",
-    "build:html": "babel-node tools/buildHtml.js",
-    "prebuild": "npm-run-all clean-dist test lint build:html",
+    "prebuild": "npm-run-all clean-dist test lint",
     "build": "babel-node tools/build.js",
     "postbuild": "babel-node tools/distServer.js"
   },
@@ -48,7 +47,6 @@
     "babel-register": "6.16.3",
     "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
-    "cheerio": "0.22.0",
     "compression": "1.6.2",
     "cross-env": "3.1.3",
     "css-loader": "0.25.0",
