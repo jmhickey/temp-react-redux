@@ -21,13 +21,6 @@ export class ManageMemberPage extends React.Component {
     this.saveMember = this.saveMember.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.member.id != nextProps.member.id) {
-      //Necessary to populate form when existing member is loaded directly.
-      this.setState({member: Object.assign({}, nextProps.member)});
-    }
-  }
-
   updateMemberState(event) {
     const field = event.target.name;
     let member = Object.assign({}, this.state.member);
@@ -104,6 +97,7 @@ export class ManageMemberPage extends React.Component {
 }
 
 ManageMemberPage.propTypes = {
+  key: PropTypes.number.isRequired,
   member: PropTypes.object.isRequired,
   genders: PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
@@ -129,6 +123,7 @@ function mapStateToProps(state, ownProps) {
   }
 
   return {
+    key: member.id, //This ensures that compenent is recreated on change (e.g. when route is accessed directly and async data becomes available later)
     member: member,
     genders: gendersFormattedForDropdown(state.genders)
   };
