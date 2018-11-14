@@ -7,7 +7,6 @@ export default {
   mode: 'production',
   devtool: 'source-map',
   entry: {
-    vendor: path.resolve(__dirname, 'src/vendor'),
     main: path.resolve(__dirname, 'src/index')
   },
   target: 'web',
